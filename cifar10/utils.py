@@ -333,9 +333,17 @@ def timm_vit_b4_32x32(num_classes=10, input_channels=3):
     )
 
 
+# No Pretrained 224x224 size
 def timm_vit_nopretrained_base_patch16_224(num_classes=10):
     net = timm.create_model(
         "vit_base_patch16_224_in21k", pretrained=False, num_classes=num_classes
+    )
+    return net
+
+
+def timm_vit_nopretrained_small_patch16_224(num_classes=10):
+    net = timm.create_model(
+        "vit_small_patch16_224_in21k", pretrained=False, num_classes=num_classes
     )
     return net
 
@@ -347,11 +355,25 @@ def timm_vit_nopretrained_tiny_patch16_224(num_classes=10):
     return net
 
 
+# Pretrained 224x224 size
 def timm_vit_pretrained_base_patch16_224(num_classes=10):
     net = timm.create_model(
         "vit_base_patch16_224_in21k", pretrained=True, num_classes=num_classes
     )
     return net
+    # net = timm.create_model("vit_base_patch16_224_in21k", pretrained=True)
+    # net.head = nn.Linear(net.head.in_features, num_classes)
+    # return net
+
+
+def timm_vit_pretrained_small_patch16_224(num_classes=10):
+    net = timm.create_model(
+        "vit_small_patch16_224_in21k", pretrained=True, num_classes=num_classes
+    )
+    return net
+    # net = timm.create_model("vit_small_patch16_224_in21k", pretrained=True)
+    # net.head = nn.Linear(net.head.in_features, num_classes)
+    # return net
 
 
 def timm_vit_pretrained_tiny_patch16_224(num_classes=10):
@@ -359,16 +381,20 @@ def timm_vit_pretrained_tiny_patch16_224(num_classes=10):
         "vit_tiny_patch16_224_in21k", pretrained=True, num_classes=num_classes
     )
     return net
+    # net = timm.create_model("vit_tiny_patch16_224_in21k", pretrained=True)
+    # net.head = nn.Linear(net.head.in_features, num_classes)
+    # return net
 
 
+# No Pretrained 32x32 size
 def timm_vit_nopretrained_tiny_patch4_32(num_classes=10):
     net = timm.models.vision_transformer.VisionTransformer(
         img_size=32,
         patch_size=4,
         in_chans=3,
-        embed_dim=192,  # 192,512,768
+        embed_dim=192,  # 192,374,512,768
         depth=12,
-        num_heads=3,  # 12,3
+        num_heads=3,  # 12,6,3
         mlp_ratio=4,
         qkv_bias=True,
         num_classes=num_classes,
@@ -376,6 +402,22 @@ def timm_vit_nopretrained_tiny_patch4_32(num_classes=10):
     return net
 
 
+def timm_vit_nopretrained_small_patch4_32(num_classes=10):
+    net = timm.models.vision_transformer.VisionTransformer(
+        img_size=32,
+        patch_size=4,
+        in_chans=3,
+        embed_dim=384,  # 192,384,512,768
+        depth=12,
+        num_heads=6,  # 12,6,3
+        mlp_ratio=4,
+        qkv_bias=True,
+        num_classes=num_classes,
+    )
+    return net
+
+
+# Resnets
 def timm_resnet_nopretrained(num_classes=10):
     return timm.create_model("resnet18", pretrained=False, num_classes=num_classes)
 
