@@ -359,33 +359,39 @@ def timm_vit_nopretrained_tiny_patch16_224(num_classes=10):
 
 # Pretrained 224x224 size
 def timm_vit_pretrained_base_patch16_224(num_classes=10):
-    net = timm.create_model(
-        "vit_base_patch16_224_in21k", pretrained=True, num_classes=num_classes
-    )
-    return net
-    # net = timm.create_model("vit_base_patch16_224_in21k", pretrained=True)
-    # net.head = nn.Linear(net.head.in_features, num_classes)
+    # net = timm.create_model(
+    #     "vit_base_patch16_224_in21k", pretrained=True, num_classes=num_classes
+    # )
     # return net
+    net = timm.create_model("vit_base_patch16_224_in21k", pretrained=True)
+    for param in net.parameters():
+        param.requires_grad = False
+    net.head = nn.Linear(net.head.in_features, num_classes)
+    return net
 
 
 def timm_vit_pretrained_small_patch16_224(num_classes=10):
-    net = timm.create_model(
-        "vit_small_patch16_224_in21k", pretrained=True, num_classes=num_classes
-    )
-    return net
-    # net = timm.create_model("vit_small_patch16_224_in21k", pretrained=True)
-    # net.head = nn.Linear(net.head.in_features, num_classes)
+    # net = timm.create_model(
+    #     "vit_small_patch16_224_in21k", pretrained=True, num_classes=num_classes
+    # )
     # return net
+    net = timm.create_model("vit_small_patch16_224_in21k", pretrained=True)
+    for param in net.parameters():
+        param.requires_grad = False
+    net.head = nn.Linear(net.head.in_features, num_classes)
+    return net
 
 
 def timm_vit_pretrained_tiny_patch16_224(num_classes=10):
-    net = timm.create_model(
-        "vit_tiny_patch16_224_in21k", pretrained=True, num_classes=num_classes
-    )
-    return net
-    # net = timm.create_model("vit_tiny_patch16_224_in21k", pretrained=True)
-    # net.head = nn.Linear(net.head.in_features, num_classes)
+    # net = timm.create_model(
+    #     "vit_tiny_patch16_224_in21k", pretrained=True, num_classes=num_classes
+    # )
     # return net
+    net = timm.create_model("vit_tiny_patch16_224_in21k", pretrained=True)
+    for param in net.parameters():
+        param.requires_grad = False
+    net.head = nn.Linear(net.head.in_features, num_classes)
+    return net
 
 
 # No Pretrained 32x32 size
