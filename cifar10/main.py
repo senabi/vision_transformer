@@ -54,11 +54,6 @@ def training(local_rank, config):
             task.connect(config)
 
     # Setup dataflow, model, optimizer, criterion
-    train_loader = None
-    test_loader = None
-    model = None
-    torch.cuda.empty_cache()
-    gc.collect()
     train_loader, test_loader = get_dataflow(config)
 
     config["num_iters_per_epoch"] = len(train_loader)
