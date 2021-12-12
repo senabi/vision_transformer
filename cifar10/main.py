@@ -15,6 +15,7 @@ from ignite.handlers import Checkpoint, DiskSaver, global_step_from_engine
 from ignite.metrics import Accuracy, Loss
 from ignite.utils import manual_seed, setup_logger
 from torch.cuda.amp import GradScaler, autocast
+from ignite.contrib.handlers.tqdm_logger import ProgressBar
 import gc
 
 
