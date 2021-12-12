@@ -140,12 +140,14 @@ def get_model(name, num_classes=10):
         fn = __dict__[name]
     elif name in [
         "timm_vit_b4_32x32",
-        "timm_vit_nopretrained_base_patch16_224",
-        "timm_vit_nopretrained_tiny_patch16_224",
-        "timm_vit_nopretrained_tiny_patch4_32",
-        "timm_vit_pretrained_base_patch16_224",
-        "timm_vit_pretrained_tiny_patch16_224",
-        "timm_vit_nopretrained_tiny_patch4_32",
+        "timm_vit_nopretrained_base_patch16_224",  # np 224x224
+        "timm_vit_nopretrained_small_patch16_224",  # np 224x224
+        "timm_vit_nopretrained_tiny_patch16_224",  # np 224x224
+        "timm_vit_nopretrained_small_patch4_32",  # np 32x32
+        "timm_vit_nopretrained_tiny_patch4_32",  # np 32x32
+        "timm_vit_pretrained_base_patch16_224",  # p 224x224
+        "timm_vit_pretrained_small_patch16_224",  # p 224x224
+        "timm_vit_pretrained_tiny_patch16_224",  # p 224x224
         "timm_resnet_nopretrained",
         "timm_resnet_pretrained",
     ]:
