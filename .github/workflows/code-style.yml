@@ -1,0 +1,45 @@
+name: Format python code
+
+on:
+  push:
+    paths-ignore:
+      - "assets/**"
+      - ".circleci/**"
+      - "docker/**"
+      - "docs/**"
+      - "conda.recipe"
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "assets/**"
+      - ".circleci/**"
+      - "docker/**"
+      - "docs/**"
+      - "conda.recipe"
+      - "**.md"
+
+jobs:
+  code-style:
+    runs-on: ubuntu-latest
+    steps:
+      - if: github.event_name == 'push'
+        uses: actions/checkout@v2
+      - if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "3.8"
+      - run: |
+          python -m pip install autopep8 "black==19.10b0" "isort==5.7.0"
+          autopep8 --recursive --in-place --aggressive --aggressive .
+          black .
+          isort --profile black .
+
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "autopep8 fix"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

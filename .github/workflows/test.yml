@@ -1,0 +1,33 @@
+name: Test cifar10 execution
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  run-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/pip
+            /tmp/cifar10
+          key: cache-data-deps
+
+      - name: Install docs deps
+        run: |
+          pip install torch==1.8.0+cpu torchvision==0.9.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+          pip install pytorch-ignite tqdm tensorboardX fire requests
+
+      - name: Run smoke test
+        run: |
+          cd cifar10
+          python -u main.py run --smoke_test --batch_size=16 --num_epochs=1
+
